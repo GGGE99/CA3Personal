@@ -1,14 +1,14 @@
 import facade from "../facades/LoginFacade";
 import React, { useState, useEffect } from "react";
-import "./Login.css";
+import "./css/Login.css";
 import { Link } from "react-router-dom";
 
-function Signup({ login, user }) {
+function Signup({ login, user, loggedIn }) {
   const init = { username: "", password1: "", password2: "" };
   const [loginCredentials, setLoginCredentials] = useState(init);
   const [error, setError] = useState("");
 
-  const performLogin = (evt) => {
+  const performSignup = (evt) => {
     evt.preventDefault();
     if (
       loginCredentials.password1.length > 0 &&
@@ -18,7 +18,17 @@ function Signup({ login, user }) {
       if (loginCredentials.password1 === loginCredentials.password2) {
         facade
           .signup(loginCredentials.username, loginCredentials.password1)
-          .then((data) => console.log(data))
+          .then((data) => {
+            login(loginCredentials.username, loginCredentials.password1);
+            var getUrl = window.location;
+            var baseUrl = getUrl .protocol + "//" + getUrl.host;
+
+            setTimeout(() => {
+              window.location.href = baseUrl + "/profile"; //will redirect to your blog page (an ex: blog.html)
+           }, 1000)
+
+            
+          })
           .catch((err) => {
             if (err.status) {
               err.fullError.then((e) => {
@@ -32,7 +42,7 @@ function Signup({ login, user }) {
         setError("Password doesn't match");
       }
     } else {
-        setError("You must write in all fields");
+      setError("You must write in all fields");
     }
   };
   const onChange = (evt) => {
@@ -44,43 +54,57 @@ function Signup({ login, user }) {
 
   return (
     <div className="login">
-      <h2>Sign-up</h2>
-      <form onChange={onChange} className="form__group">
-        <div className="input">
-          <input
-            type="input"
-            className="form__field"
-            placeholder="Name"
-            name="username"
-            id="username"
-            required
-          />
+      {loggedIn ? (
+        <div className="signed-up">
+          <div className="signed-up-content">
+            <h2>You are now signed up go to profile</h2>
+            <h2>(if redirected doesn't work)</h2>
+            <Link to="/profile">
+              <h3>Here</h3>
+            </Link>
+          </div>
         </div>
-        <div className="input">
-          <input
-            type="password"
-            className="form__field"
-            placeholder="Password"
-            name="password1"
-            id="password1"
-            required
-          />
-        </div>
-        <div className="input">
-          <input
-            type="password"
-            className="form__field"
-            placeholder="Password"
-            name="password2"
-            id="password2"
-            required
-          />
-        </div>
-        <button onClick={performLogin}>Login</button>
-      </form>
-      {user !== "Loading..." ? user : <> </>}
-      <Link to="/signup">Sign-up</Link>
-      <p>{error}</p>
+      ) : (
+        <>
+          <h2>Sign-up</h2>
+          <form onChange={onChange} className="form__group">
+            <div className="input">
+              <input
+                type="input"
+                className="form__field"
+                placeholder="Name"
+                name="username"
+                id="username"
+                required
+              />
+            </div>
+            <div className="input">
+              <input
+                type="password"
+                className="form__field"
+                placeholder="Password"
+                name="password1"
+                id="password1"
+                required
+              />
+            </div>
+            <div className="input">
+              <input
+                type="password"
+                className="form__field"
+                placeholder="Password"
+                name="password2"
+                id="password2"
+                required
+              />
+            </div>
+            <button onClick={performSignup}>Sign-up</button>
+          </form>
+          {user !== "Loading..." ? user : <> </>}
+          <Link to="/signup">Sign-up</Link>
+          <p>{error}</p>
+        </>
+      )}
     </div>
   );
 }

@@ -75,6 +75,11 @@
   display: none;
 }
 
+.profile-pic{
+  width: 40px;
+  margin: 20px;
+}
+
 @media screen and (max-width: 960px) {
   .NavbarItems {
     position: relative;

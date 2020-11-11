@@ -1,11 +1,13 @@
 package rest;
 
 import DTOs.UserDTO;
+import DTOs.UserInfoDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import entities.User;
+import entities.UserInfo;
 import errorhandling.InvalidInputException;
 import facades.UserFacade;
 import java.util.ArrayList;
@@ -26,21 +28,19 @@ import javax.ws.rs.core.SecurityContext;
 import security.UserPrincipal;
 import utils.EMF_Creator;
 
-/**
- * @author lam@cphbusiness.dk
- */
-@Path("signup")
-public class SignupEndpoint {
+@Path("user")
+public class UserEndpoint {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     private static final UserFacade FACADE = UserFacade.getUserFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
-//    @Context
-//    private UriInfo context;
-//
-//    @Context
-//    SecurityContext securityContext;
+    @Context
+    private UriInfo context;
+
+    @Context
+    SecurityContext securityContext;
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getInfoForAll() {
@@ -58,5 +58,39 @@ public class SignupEndpoint {
         userDTO = FACADE.addUser(userDTO);
 
         return GSON.toJson(userDTO);
+    }
+
+    @POST
+    @Path("info")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin", "user"})
+    public String makeUserInfo(String userInfoString) throws InvalidInputException {
+        String thisuser = securityContext.getUserPrincipal().getName();
+        UserInfoDTO userInfoDTO = GSON.fromJson(userInfoString, UserInfoDTO.class);
+        EntityManager em = EMF.createEntityManager();
+        System.out.println(thisuser);
+        User user = null;
+
+        try {
+            TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.userName = :userName", User.class);
+            query.setParameter("userName", thisuser);
+            user = query.getSingleResult();
+            UserInfo userInfo = user.getUserInfo();
+
+            if (userInfo == null) {
+                userInfo = new UserInfo();
+                user.setUserInfo(userInfo);
+            }
+
+            userInfo.setInfo(userInfoDTO);
+            em.getTransaction().begin();
+            em.persist(user);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+
+        }
+
+        return GSON.toJson(new UserDTO(user));
     }
 }

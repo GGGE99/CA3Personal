@@ -56,25 +56,6 @@ public class DemoResource {
         }
     }
 
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("user")
-    public String make() {
-        String thisuser = securityContext.getUserPrincipal().getName();
-        JsonObject obj = new JsonObject();
-        obj.addProperty("name", thisuser);
-        JsonArray array = new JsonArray();
-        array.add("user");
-        boolean s = securityContext.isUserInRole("admin");
-        if (s) {
-            array.add("admin");
-        }
-        obj.add("roles", array);
-
-        return obj.toString();
-    }
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("user")

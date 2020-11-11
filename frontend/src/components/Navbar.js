@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "./Button";
 import { Link } from "react-router-dom";
-import "./Navbar.css";
+import profile from "../images/profile.png";
+import "./css/Navbar.css";
 
-function Navbar() {
+function Navbar({ loggedIn }) {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -66,6 +67,12 @@ function Navbar() {
                 SING IN
               </Button>
             </Link>
+          )}
+
+          {loggedIn && (
+          <Link to="/profile">
+          <img src={profile} className="profile-pic" />
+          </Link>
           )}
         </div>
       </nav>

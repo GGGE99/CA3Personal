@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import facade from "./facades/LoginFacade";
 import Home from "./components/Home";
 import Signup from "./components/Signup";
+import Profile from "./components/Profile";
 
 function App() {
   const [user, setUser] = useState("Loading...");
@@ -39,7 +40,7 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar />
+        <Navbar loggedIn={loggedIn} />
         <Switch>
           <Route path="/" exact>
             <Home />
@@ -69,6 +70,9 @@ function App() {
               logout={logout}
               setLoggedIn={setLoggedIn}
             />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
         </Switch>
       </Router>

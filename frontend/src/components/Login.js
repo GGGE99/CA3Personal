@@ -1,6 +1,6 @@
 import facade from "../facades/LoginFacade";
 import React, { useState, useEffect } from "react";
-import "./Login.css";
+import "./css/Login.css";
 import { Link } from "react-router-dom";
 
 function Login({ login, user }) {
@@ -45,6 +45,7 @@ function Login({ login, user }) {
         <button onClick={performLogin}>Login</button>
       </form>
       {user !== "Loading..." ? user : <> </>}
+      <br/>
       <Link to="/signup">Sign-up</Link>
     </div>
   );
@@ -70,7 +71,6 @@ function LoggedIn({ user, setUser, setUserRole, setLoggedIn, userRole }) {
         .catch((err) => {});
     } catch (err) {
       setLoggedIn(false);
-      console.log(err);
     }
   }, []);
 
@@ -78,9 +78,21 @@ function LoggedIn({ user, setUser, setUserRole, setLoggedIn, userRole }) {
     <div>
       <h2>Data Received from server</h2>
       <h3>Hello {user}</h3>
-      <h3>Your role is {userRole.map(e => <> {e} </>)}</h3>
+      {userRole.length < 2 ? (
+        <h3>Your role is {userRole}</h3>
+      ) : (
+        <h3>
+          Your roles are {userRole[0]} and {userRole[1]}
+        </h3>
+      )}
     </div>
   );
+}
+
+function Role() {
+  let test = true;
+
+  return <h3>Your role is</h3>;
 }
 
 function LoginDisplay({

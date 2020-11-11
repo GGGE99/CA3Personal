@@ -1,6 +1,6 @@
 import facade from "../facades/fetchFacade";
 import React, { useState, useEffect } from "react";
-import "./Home.css";
+import "./css/Home.css";
 
 export default function Home() {
   const [dataFromServer, setDataFromServer] = useState({ isEmpty: true });

@@ -24,7 +24,7 @@ function apiFacade() {
       username,
       password
     }); 
-    return fetch("http://localhost:8080/jpareststarter/api/signup", options).then(handleHttpErrors);
+    return fetch(URL + "/api/user", options).then(handleHttpErrors);
   }
 
   const fetchUserRole = (user) => {
