@@ -2,9 +2,9 @@ import React from "react";
 import "./css/Button.css";
 import { Link } from "react-router-dom";
 
-const STYLES = ["btn--primary", "btn--outline", "btn--test"];
+const STYLES = ["b--primary", "b--outline", "b--test"];
 
-const SIZES = ["btn--medium", "btn--large"];
+const SIZES = ["b--medium", "b--large"];
 
 export const Button = ({
   children,
@@ -22,7 +22,7 @@ export const Button = ({
 
   return (
     <button
-      className={`btn ${checkButtonStyle} ${checkButtonSize}`}
+      className={`button ${checkButtonStyle} ${checkButtonSize}`}
       onClick={onClick}
       type={type}
     >

@@ -38,8 +38,8 @@ function Navbar({ loggedIn }) {
   return (
     <>
       <nav className="navbar">
-        <div className="navbar-container">
-          <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
+        <div className="n-container">
+          <Link to="/" className="n-logo" onClick={closeMobileMenu}>
             BANDEN
             <i className="fab fa-typo3" />
           </Link>
@@ -61,20 +61,21 @@ function Navbar({ loggedIn }) {
             </li>
           </ul>
 
+          {loggedIn && (
+          <Link to="/profile">
+            <img src={profile} className="profile-pic" />
+          </Link>
+        )}
           {button && (
-            <Link to="signin" className="btn-mobile">
-              <Button buttonStyle="btn--outline" link="/signin">
+            <Link to="signin" className="b-mobile">
+              <Button buttonStyle="b--outline" link="/signin">
                 SING IN
               </Button>
             </Link>
           )}
-
-          {loggedIn && (
-          <Link to="/profile">
-          <img src={profile} className="profile-pic" />
-          </Link>
-          )}
         </div>
+
+
       </nav>
     </>
   );

@@ -5,7 +5,7 @@ import "./css/Home.css";
 export default function Home() {
   const [dataFromServer, setDataFromServer] = useState({ isEmpty: true });
   useEffect(() => {
-    facade.fetchData().then((data) => setDataFromServer(data));
+    facade.jokeFetcher().then((data) => setDataFromServer(data));
   }, []);
 
   return (

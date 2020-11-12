@@ -7,11 +7,31 @@ import facade from "./facades/LoginFacade";
 import Home from "./components/Home";
 import Signup from "./components/Signup";
 import Profile from "./components/Profile";
+import Services from "./components/Services";
+import FACADE from "./facades/userFacade";
 
 function App() {
   const [user, setUser] = useState("Loading...");
   const [loggedIn, setLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState([]);
+  const init = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    country: "",
+    city: "",
+    address: "",
+  };
+  const [userInfo, setUserInfo] = useState(init);
+
+  useEffect(() => {
+    FACADE.getUserInfo()
+      .then((data) => {
+        setUserInfo(data);
+      })
+      .catch((err) => console.log(err));
+  }, [loggedIn]);
 
   const login = (user, pass) => {
     facade
@@ -45,7 +65,7 @@ function App() {
           <Route path="/" exact>
             <Home />
           </Route>
-          <Route path="/services" />
+          <Route path="/services"> <Services/> </Route>
           <Route path="/products" />
           <Route path="/signin">
             <Login
@@ -72,7 +92,7 @@ function App() {
             />
           </Route>
           <Route path="/profile">
-            <Profile />
+            <Profile userInfo={userInfo} setUserInfo={setUserInfo} />
           </Route>
         </Switch>
       </Router>

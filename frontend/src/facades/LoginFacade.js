@@ -1,5 +1,5 @@
 import token, { makeOptions, handleHttpErrors } from "./fetchUtils";
-import { loginURL as URL } from "./settings";
+import { base as URL } from "./settings";
 
 function apiFacade() {
   const setToken = (token) => token.setToken(token)
