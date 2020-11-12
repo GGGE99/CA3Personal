@@ -18,7 +18,14 @@ function utilFetch() {
       handleHttpErrors
     );
   };
-  return { jokeFetcher, locationFetcher, weatherFetcher };
+
+  const allWeatherFetcher = (lat, lon) => {
+    const options = makeOptions("GET", true);
+    return fetch(`${URL}/api/weather/all/${lat}/${lon}`, options).then(
+      handleHttpErrors
+    );
+  };
+  return { jokeFetcher, locationFetcher, weatherFetcher, allWeatherFetcher };
 }
 const facade = utilFetch();
 export default facade;

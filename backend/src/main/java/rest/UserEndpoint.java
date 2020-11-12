@@ -11,7 +11,11 @@ import entities.UserInfo;
 import errorhandling.InvalidInputException;
 import facades.UserFacade;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -28,13 +32,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import security.UserPrincipal;
 import utils.EMF_Creator;
+import utils.WeatherImagesMap;
 
 @Path("user")
 public class UserEndpoint {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     private static final UserFacade FACADE = UserFacade.getUserFacade(EMF);
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();       
 
     @Context
     private UriInfo context;
@@ -74,7 +79,7 @@ public class UserEndpoint {
         User user = null;
 
         try {
-            TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.userName = :userName", User.class);
+            TypedQuery<User> query = em.createQuery("SELECT u FROM User u WH ERE u.userName = :userName", User.class);
             query.setParameter("userName", thisuser);
             user = query.getSingleResult();
             UserInfo userInfo = user.getUserInfo();
