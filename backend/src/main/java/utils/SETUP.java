@@ -1,5 +1,7 @@
 package utils;
 
+
+
 import entities.Role;
 import entities.User;
 import entities.UserInfo;
@@ -7,7 +9,7 @@ import entities.UserInfo;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-public class SetupTestUsers {
+public class SETUP {
 
     public static void main(String[] args) {
 

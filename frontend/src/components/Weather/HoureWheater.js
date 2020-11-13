@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Jumbotron, Row, Col } from "react-bootstrap";
+import { Container, Jumbotron, Button, Col } from "react-bootstrap";
 import FACADE from "../../facades/fetchFacade";
 import "../css/Weather.css";
 
@@ -15,13 +15,13 @@ function HoureWheather({ futureWeather, setWeather }) {
   }, []);
 
   const days = {
-    0: "Monday",
-    1: "Tuesday",
-    2: "Wednesday",
-    3: "Thursday",
-    4: "Friday",
-    5: "Saturday",
-    6: "Sunday",
+    1: "Monday",
+    2: "Tuesday",
+    3: "Wednesday",
+    4: "Thursday",
+    5: "Friday",
+    6: "Saturday",
+    0: "Sunday",
   };
 
   const click = (val) => {
@@ -53,7 +53,7 @@ function HoureWheather({ futureWeather, setWeather }) {
                         className="wheather-img"
                         src={images[nextHoure.summary.symbol_code]}
                       />
-                      <button onClick={() => click(value1.instant.details)}>See details</button>
+                      <Button onClick={() => click(value1.instant.details)}>See details</Button>
                     </Jumbotron>
                   </Col>
                 );

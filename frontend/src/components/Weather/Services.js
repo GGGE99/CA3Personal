@@ -17,8 +17,8 @@ function Services() {
     FACADE.locationFetcher()
       .then((data) => {
         const tempLocation = {
-          lat: data.lat,
-          lon: data.lon,
+          lat: data.latitude,
+          lon: data.longitude,
           city: data.city,
         };
         setLocation({ ...tempLocation });

@@ -1,7 +1,7 @@
 export const base = "https://marcge.dk/tomcat/CA3Personal";
 
 export const jokeURL = "https://marcge.dk/tomcat/CA3Personal/api/jokes";
-export const locationURL = "http://ip-api.com/json/";
+export const locationURL = "https://api.ipgeolocation.io/ipgeo?apiKey=496ef9715efb448090be97ee10c54df8";
 
 
 // 
