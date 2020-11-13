@@ -7,7 +7,7 @@ import facade from "./facades/LoginFacade";
 import Home from "./components/Home";
 import Signup from "./components/Signup";
 import Profile from "./components/Profile";
-import Services from "./components/Services";
+import Services from "./components/Weather/Services";
 import FACADE from "./facades/userFacade";
 
 function App() {
@@ -62,6 +62,7 @@ function App() {
       <Router>
         <Navbar loggedIn={loggedIn} />
         <Switch>
+          
           <Route path="/" exact>
             <Home />
           </Route>
@@ -94,6 +95,7 @@ function App() {
           <Route path="/profile">
             <Profile userInfo={userInfo} setUserInfo={setUserInfo} />
           </Route>
+         
         </Switch>
       </Router>
     </>

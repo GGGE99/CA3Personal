@@ -71,10 +71,18 @@ public class WeatherEndpoint {
     public String getWeatherAll(@PathParam("lat") double lat, @PathParam("lon") double lon) throws IOException {
         JsonObject returnObj = new JsonObject();
         JsonObject obj = GSON.fromJson(HttpUtils.fetchData("https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=" + lat + "&lon=" + lon), JsonObject.class);
-        JsonArray arr = obj.getAsJsonObject("properties").getAsJsonArray("timeseries");
-        arr.remove(0);
-        returnObj.add("times", arr);
-        return arr.toString();
+        JsonArray retObj = obj.getAsJsonObject("properties").getAsJsonArray("timeseries");
+//        arr.remove(0);
+//        returnObj.add("times", arr);
+        return retObj.toString();
+    }
+
+    @GET
+    @Path("/images")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllImages(@PathParam("lat") double lat, @PathParam("lon") double lon) throws IOException {
+        
+        return GSON.toJson(map);
     }
 
 }

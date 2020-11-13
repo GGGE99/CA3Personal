@@ -25,7 +25,14 @@ function utilFetch() {
       handleHttpErrors
     );
   };
-  return { jokeFetcher, locationFetcher, weatherFetcher, allWeatherFetcher };
+
+  const imageFetcher = () => {
+    const options = makeOptions("GET", true);
+    return fetch(`${URL}/api/weather/images`, options).then(
+      handleHttpErrors
+    );
+  };
+  return { jokeFetcher, locationFetcher, weatherFetcher, allWeatherFetcher, imageFetcher };
 }
 const facade = utilFetch();
 export default facade;
