@@ -2,6 +2,8 @@
 # API-QuickStart-project [![Build Status](https://travis-ci.org/GGGE99/CA3Personal.svg?branch=main)](https://travis-ci.org/GGGE99/CA3Personal)
 
 ## [website](https://marcge.dk/)
+## [Travis](https://travis-ci.org/github/GGGE99/CA3Personal)
+
 
 ## Backend setup
 for at opsætte start koden skal der gøres det samme som for den udleveret start koden som ses i dette link
