@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Container, Jumbotron, Button, Col } from "react-bootstrap";
+import { Jumbotron, Button, Col } from "react-bootstrap";
 import FACADE from "../../facades/fetchFacade";
 import "../css/Weather.css";
 
-function HoureWheather({ futureWeather, setWeather }) {
+function HoureWheather({ futureWeather, setWeather, imageSetter, startImg }) {
   const [images, setImages] = useState({});
 
   useEffect(() => {
+    setImage(startImg);
     FACADE.imageFetcher()
       .then((data) => {
         setImages({ ...data });
@@ -25,8 +26,11 @@ function HoureWheather({ futureWeather, setWeather }) {
   };
 
   const click = (val) => {
-    setWeather(val)
-  }
+    setWeather(val.instant.details);
+    setImage(val.next_1_hours.summary.symbol_code);
+  };
+
+  const setImage = (val) => imageSetter({ src: images[val] });
 
   return (
     <>
@@ -48,12 +52,16 @@ function HoureWheather({ futureWeather, setWeather }) {
                   <Col xs={{ order: 0 }} md={1} className="float-left h-50 p-1">
                     <Jumbotron className="pt-2 mt-1 h-100 text-center">
                       <p></p>
-                      <p>{days[day]}<br/>{time}</p>
+                      <p>
+                        {days[day]}
+                        <br />
+                        {time}
+                      </p>
                       <img
                         className="wheather-img"
                         src={images[nextHoure.summary.symbol_code]}
                       />
-                      <Button onClick={() => click(value1.instant.details)}>See details</Button>
+                      <Button onClick={() => click(value1)}>See details</Button>
                     </Jumbotron>
                   </Col>
                 );

@@ -45,7 +45,7 @@ function Login({ login, user }) {
         <button onClick={performLogin}>Login</button>
       </form>
       {user !== "Loading..." ? user : <> </>}
-      <br/>
+      <br />
       <Link to="/signup">Sign-up</Link>
     </div>
   );

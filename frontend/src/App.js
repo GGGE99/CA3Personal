@@ -60,13 +60,15 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar loggedIn={loggedIn} />
+        <Navbar loggedIn={loggedIn} userRole={userRole} />
         <Switch>
-          
           <Route path="/" exact>
             <Home />
           </Route>
-          <Route path="/services"> <Services/> </Route>
+          <Route path="/services">
+            {" "}
+            <Services />{" "}
+          </Route>
           <Route path="/products" />
           <Route path="/signin">
             <Login
@@ -95,7 +97,6 @@ function App() {
           <Route path="/profile">
             <Profile userInfo={userInfo} setUserInfo={setUserInfo} />
           </Route>
-         
         </Switch>
       </Router>
     </>

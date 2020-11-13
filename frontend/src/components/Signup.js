@@ -1,12 +1,13 @@
 import facade from "../facades/LoginFacade";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./css/Login.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function Signup({ login, user, loggedIn }) {
   const init = { username: "", password1: "", password2: "" };
   const [loginCredentials, setLoginCredentials] = useState(init);
   const [error, setError] = useState("");
+  const history = useHistory();
 
   const performSignup = (evt) => {
     evt.preventDefault();
@@ -21,13 +22,13 @@ function Signup({ login, user, loggedIn }) {
           .then((data) => {
             login(loginCredentials.username, loginCredentials.password1);
             var getUrl = window.location;
-            var baseUrl = getUrl .protocol + "//" + getUrl.host;
+            var baseUrl = getUrl.protocol + "//" + getUrl.host;
 
             setTimeout(() => {
-              window.location.href = baseUrl + "/profile"; //will redirect to your blog page (an ex: blog.html)
-           }, 1000)
-
-            
+              console.log(history);
+              history.push((history.location.pathname = "/profile"));
+              // window.location.href = baseUrl + "/profile"; //will redirect to your blog page (an ex: blog.html)
+            }, 1000);
           })
           .catch((err) => {
             if (err.status) {
@@ -101,7 +102,6 @@ function Signup({ login, user, loggedIn }) {
             <button onClick={performSignup}>Sign-up</button>
           </form>
           {user !== "Loading..." ? user : <> </>}
-          <Link to="/signup">Sign-up</Link>
           <p>{error}</p>
         </>
       )}

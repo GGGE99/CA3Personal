@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import profile from "../images/profile.png";
 import { Navbar, Nav } from "react-bootstrap";
 import "./css/Navbar.css";
 
-function NavbarBootstrap({ loggedIn }) {
-
+function NavbarBootstrap({ loggedIn, userRole }) {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Link to="/" className="navbar-brand">
@@ -14,12 +13,17 @@ function NavbarBootstrap({ loggedIn }) {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Link to="/services" className="nav-link">
-            Features
-          </Link>
-          <Link to="/services" className="nav-link">
-            Services
-          </Link>
+          {userRole.includes("user") ? (
+            <Link to="/services" className="nav-link">
+              Features
+            </Link>
+          ) : userRole.includes("admin") ? (
+            <Link to="/services" className="nav-link">
+              Services
+            </Link>
+          ) : (
+            <></>
+          )}
         </Nav>
         <Nav>
           {loggedIn ? (

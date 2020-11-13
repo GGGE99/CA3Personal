@@ -55,6 +55,7 @@ public class WeatherEndpoint {
     @GET
     @Path("/{lat}/{lon}")
     @Produces(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin", "user"})
     public String getWeather(@PathParam("lat") double lat, @PathParam("lon") double lon) throws IOException {
         JsonObject obj = GSON.fromJson(HttpUtils.fetchData("https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=" + lat + "&lon=" + lon), JsonObject.class);
         JsonObject properties = new JsonObject();
@@ -66,6 +67,7 @@ public class WeatherEndpoint {
     }
 
     @GET
+    @RolesAllowed({"admin", "user"})
     @Path("/all/{lat}/{lon}")
     @Produces(MediaType.APPLICATION_JSON)
     public String getWeatherAll(@PathParam("lat") double lat, @PathParam("lon") double lon) throws IOException {
@@ -79,9 +81,10 @@ public class WeatherEndpoint {
 
     @GET
     @Path("/images")
+    @RolesAllowed({"admin", "user"})
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllImages(@PathParam("lat") double lat, @PathParam("lon") double lon) throws IOException {
-        
+
         return GSON.toJson(map);
     }
 

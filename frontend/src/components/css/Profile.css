@@ -27,9 +27,18 @@
   width: 50%;
   height: 2rem;
   border-radius: 5px;
+  color: aliceblue;
   background: linear-gradient(
     45deg,
     rgb(25, 0, 255) 35%,
     rgb(0, 217, 255) 100%
   );
+}
+
+.info-saved{
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+  /* transform: translateY(-50%); */
 }

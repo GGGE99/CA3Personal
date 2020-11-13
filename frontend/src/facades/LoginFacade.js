@@ -2,7 +2,7 @@ import token, { makeOptions, handleHttpErrors } from "./fetchUtils";
 import { base as URL } from "./settings";
 
 function apiFacade() {
-  const setToken = (token) => token.setToken(token)
+  const setToken = (token) => token.setToken(token);
   const getToken = () => token.getToken();
   const loggedIn = () => token.loggedIn();
   const logout = () => token.logout();
@@ -19,16 +19,16 @@ function apiFacade() {
       });
   };
 
-  const signup = (username, password) =>{
+  const signup = (username, password) => {
     const options = makeOptions("POST", true, {
       username,
-      password
-    }); 
+      password,
+    });
     return fetch(URL + "/api/user", options).then(handleHttpErrors);
-  }
+  };
 
   const fetchUserRole = (user) => {
-    const options = makeOptions("GET", true); 
+    const options = makeOptions("GET", true);
     return fetch(URL + "/api/info/" + user, options).then(handleHttpErrors);
   };
 
@@ -39,7 +39,7 @@ function apiFacade() {
     getToken,
     loggedIn,
     logout,
-    signup
+    signup,
   };
 }
 const facade = apiFacade();
