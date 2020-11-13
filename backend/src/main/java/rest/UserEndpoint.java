@@ -39,7 +39,7 @@ public class UserEndpoint {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     private static final UserFacade FACADE = UserFacade.getUserFacade(EMF);
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();       
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     @Context
     private UriInfo context;
@@ -75,11 +75,10 @@ public class UserEndpoint {
         String thisuser = securityContext.getUserPrincipal().getName();
         UserInfoDTO userInfoDTO = GSON.fromJson(userInfoString, UserInfoDTO.class);
         EntityManager em = EMF.createEntityManager();
-        System.out.println(userInfoString);
         User user = null;
 
         try {
-            TypedQuery<User> query = em.createQuery("SELECT u FROM User u WH ERE u.userName = :userName", User.class);
+            TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.userName = :userName", User.class);
             query.setParameter("userName", thisuser);
             user = query.getSingleResult();
             UserInfo userInfo = user.getUserInfo();
@@ -93,11 +92,11 @@ public class UserEndpoint {
             em.getTransaction().begin();
             em.persist(user);
             em.getTransaction().commit();
+            return GSON.toJson(new UserDTO(user));
+
         } catch (Exception e) {
-
+            return GSON.toJson(e);
         }
-
-        return GSON.toJson(new UserDTO(user));
     }
 
     @GET
