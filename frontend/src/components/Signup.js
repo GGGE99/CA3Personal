@@ -25,7 +25,6 @@ function Signup({ login, user, loggedIn }) {
             var baseUrl = getUrl.protocol + "//" + getUrl.host;
 
             setTimeout(() => {
-              console.log(history);
               history.push((history.location.pathname = "/profile"));
               // window.location.href = baseUrl + "/profile"; //will redirect to your blog page (an ex: blog.html)
             }, 1000);

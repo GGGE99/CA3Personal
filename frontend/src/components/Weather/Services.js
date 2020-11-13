@@ -14,10 +14,17 @@ function Services() {
   const [weather, setWeather] = useState({ isEmpty: true });
   const [futureWeather, setFutureWeather] = useState({ isEmpty: true });
   const [bigImage, setBigImage] = useState({ isEmpty: true });
-  const [startImg, setStartImg] = useState("");
   const [error, setError] = useState("loading...");
+  const [images, setImages] = useState({});
 
   const imageSetter = (val) => setBigImage({ ...val });
+
+  useEffect(() => {
+    if(futureWeather[0])
+    setBigImage({
+      src: images[futureWeather[0].data.next_1_hours.summary.symbol_code],
+    })
+  }, [futureWeather]);
 
   useEffect(() => {
     FACADE.locationFetcher()
@@ -49,8 +56,6 @@ function Services() {
           .then((data) => {
             setError("");
             setFutureWeather({ ...data });
-            setStartImg(data[0].data.next_1_hours.summary.symbol_code);
-            console.log();
           })
           .catch((err) => {
             if (err.status) {
@@ -63,9 +68,16 @@ function Services() {
           });
       })
       .catch((err) => console.log(err));
+  }, [images]);
+
+  useEffect(() => {
+    FACADE.imageFetcher()
+      .then((data) => {
+        setImages({ ...data });
+      })
+      .catch((err) => console.log(err));
   }, []);
   if (!error) {
-    console.log(error);
     return (
       <Container fluid className="h-100">
         <Row className="h-100 d-md-block">
@@ -76,10 +88,10 @@ function Services() {
             bigImage={bigImage}
           />
           <HoureWheather
+            images={images}
             futureWeather={futureWeather}
             setWeather={setWeather}
-            imageSetter={imageSetter}
-            startImg={startImg}
+            setBigImage={setBigImage}
           />
         </Row>
       </Container>

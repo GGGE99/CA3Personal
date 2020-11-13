@@ -3,17 +3,10 @@ import { Jumbotron, Button, Col } from "react-bootstrap";
 import FACADE from "../../facades/fetchFacade";
 import "../css/Weather.css";
 
-function HoureWheather({ futureWeather, setWeather, imageSetter, startImg }) {
-  const [images, setImages] = useState({});
+function HoureWheather({ futureWeather, setWeather, setBigImage, images }) {
+  const [imagesToShow, setImagesToShow] = useState({});
 
-  useEffect(() => {
-    setImage(startImg);
-    FACADE.imageFetcher()
-      .then((data) => {
-        setImages({ ...data });
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  useEffect(() => setImagesToShow({...images}) , [images]);
 
   const days = {
     1: "Monday",
@@ -27,10 +20,8 @@ function HoureWheather({ futureWeather, setWeather, imageSetter, startImg }) {
 
   const click = (val) => {
     setWeather(val.instant.details);
-    setImage(val.next_1_hours.summary.symbol_code);
+    setBigImage({ src: images[val.next_1_hours.summary.symbol_code] })
   };
-
-  const setImage = (val) => imageSetter({ src: images[val] });
 
   return (
     <>

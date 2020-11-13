@@ -16,7 +16,6 @@ function WheatherInfo({ location, weather, meta, bigImage }) {
   if (location.isEmpty && weather.isEmpty && meta.isEmpty) {
     return <></>;
   } else {
-    console.log(location + ", " + meta + ", " + weather);
     return (
       <Col
         xs={{ order: 100 }}

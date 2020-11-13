@@ -33,7 +33,6 @@ function utils() {
   };
   const loggedIn = () => {
     const loggedIn = getToken() != null;
-    console.log(loggedIn);
     return loggedIn;
   };
   const logout = () => {
