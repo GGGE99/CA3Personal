@@ -2,6 +2,7 @@ import facade from "../facades/LoginFacade";
 import React, { useState } from "react";
 import "./css/Login.css";
 import { Link, useHistory } from "react-router-dom";
+import NotLogedin from "./NotLogedin";
 
 function Signup({ login, user, loggedIn }) {
   const init = { username: "", password1: "", password2: "" };
@@ -52,60 +53,60 @@ function Signup({ login, user, loggedIn }) {
     });
   };
 
-  return (
-    <div className="login">
-      {loggedIn ? (
-        <div className="signed-up">
-          <div className="signed-up-content">
-            <h2>You are now signed up go to profile</h2>
-            <h2>(if redirected doesn't work)</h2>
-            <Link to="/profile">
-              <h3>Here</h3>
-            </Link>
+    return (
+      <div className="login">
+        {loggedIn ? (
+          <div className="signed-up">
+            <div className="signed-up-content">
+              <h2>You are now signed up go to profile</h2>
+              <h2>(if redirected doesn't work)</h2>
+              <Link to="/profile">
+                <h3>Here</h3>
+              </Link>
+            </div>
           </div>
-        </div>
-      ) : (
-        <>
-          <h2>Sign-up</h2>
-          <form onChange={onChange} className="form__group">
-            <div className="input">
-              <input
-                type="input"
-                className="form__field"
-                placeholder="Name"
-                name="username"
-                id="username"
-                required
-              />
-            </div>
-            <div className="input">
-              <input
-                type="password"
-                className="form__field"
-                placeholder="Password"
-                name="password1"
-                id="password1"
-                required
-              />
-            </div>
-            <div className="input">
-              <input
-                type="password"
-                className="form__field"
-                placeholder="Password"
-                name="password2"
-                id="password2"
-                required
-              />
-            </div>
-            <button onClick={performSignup}>Sign-up</button>
-          </form>
-          {user !== "Loading..." ? user : <> </>}
-          <p>{error}</p>
-        </>
-      )}
-    </div>
-  );
+        ) : (
+          <>
+            <h2>Sign-up</h2>
+            <form onChange={onChange} className="form__group">
+              <div className="input">
+                <input
+                  type="input"
+                  className="form__field"
+                  placeholder="Name"
+                  name="username"
+                  id="username"
+                  required
+                />
+              </div>
+              <div className="input">
+                <input
+                  type="password"
+                  className="form__field"
+                  placeholder="Password"
+                  name="password1"
+                  id="password1"
+                  required
+                />
+              </div>
+              <div className="input">
+                <input
+                  type="password"
+                  className="form__field"
+                  placeholder="Password"
+                  name="password2"
+                  id="password2"
+                  required
+                />
+              </div>
+              <button onClick={performSignup}>Sign-up</button>
+            </form>
+            {user !== "Loading..." ? user : <> </>}
+            <p>{error}</p>
+          </>
+        )}
+      </div>
+    );
 }
 
 export default Signup;

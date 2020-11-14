@@ -1,27 +1,38 @@
-import facade from "../facades/fetchFacade";
-import React, { useState, useEffect } from "react";
-import "./css/Home.css";
+import React from "react";
+import { Jumbotron, Row, Col, Container } from "react-bootstrap";
 
-export default function Home() {
-  const [dataFromServer, setDataFromServer] = useState({ isEmpty: true });
-  useEffect(() => {
-    facade.jokeFetcher().then((data) => setDataFromServer(data));
-  }, []);
-
+function Home() {
   return (
-    <div className="content">
-      <h1 className="jokes">Jokes</h1>
-      {dataFromServer.isEmpty ? (
-        <p>Loading..</p>
-      ) : (
-        <>
-          <h3 className="jokes">{dataFromServer.joke1}</h3>
-          <h3 className="jokes">{dataFromServer.joke2}</h3>
-          <h3 className="jokes">{dataFromServer.joke3}</h3>
-          <h3 className="jokes">{dataFromServer.joke4}</h3>
-          <h3 className="jokes">{dataFromServer.joke5}</h3>
-        </>
-      )}
-    </div>
+    <Container fluid>
+      <Row>
+        <Col></Col>
+        <Col>
+          <Jumbotron className="mt-2">
+            <h1 className="text-center">Description </h1>
+            <h2>Frontend:</h2>
+            <ul className="ml-5">
+              <li>
+                Har brugt starte koden som skabelon til at sætte projektet
+                hurtigt op
+              </li>
+              <li>Har brugt login og sign-up komponenter fra start koden</li>
+              <li>Har brugt css login og sign-up til at lave profileinfo siden</li>
+            </ul>
+            <h2>Backend:</h2>
+            <ul className="ml-5">
+              <li>Brugere det der er bygget op omkring users og tilføjet til det</li>
+              <li>Har brugt security delen til at sætte endpoints til kun at kunne til gås af bestemte roller</li>
+              <li>Har også brugt security delen til at finde den user der tilgår endpointet</li>
+            </ul>
+          </Jumbotron>
+        </Col>
+        <Col></Col>
+      </Row>
+    </Container>
+    // <div className="text-center">
+    //     <p>Hej</p>
+    // </div>
   );
 }
+
+export default Home;

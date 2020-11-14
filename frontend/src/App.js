@@ -4,9 +4,10 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./components/Login";
 import facade from "./facades/LoginFacade";
-import Home from "./components/Home";
+import Jokes from "./components/Jokes";
 import Signup from "./components/Signup";
 import Profile from "./components/Profile";
+import Home from "./components/Home";
 import Services from "./components/Weather/Services";
 import FACADE from "./facades/userFacade";
 
@@ -14,6 +15,7 @@ function App() {
   const [user, setUser] = useState("Loading...");
   const [loggedIn, setLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState([]);
+
   const init = {
     firstName: "",
     lastName: "",
@@ -60,16 +62,17 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar loggedIn={loggedIn} userRole={userRole} logout={logout}/>
+        <Navbar loggedIn={loggedIn} userRole={userRole} logout={logout} />
         <Switch>
           <Route path="/" exact>
             <Home />
           </Route>
           <Route path="/services">
-            {" "}
-            <Services />{" "}
+            <Services />
           </Route>
-          <Route path="/products" />
+          <Route path="/jokes">
+            <Jokes loggedIn={loggedIn} />
+          </Route>
           <Route path="/signin">
             <Login
               userRole={userRole}

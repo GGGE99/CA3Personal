@@ -2,9 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import profile from "../images/profile.png";
 import { Navbar, Nav } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import "./css/Navbar.css";
 
 function NavbarBootstrap({ loggedIn, userRole, logout }) {
+  const history = useHistory();
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Link to="/" className="navbar-brand">
@@ -14,8 +17,8 @@ function NavbarBootstrap({ loggedIn, userRole, logout }) {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
           {userRole.includes("user") ? (
-            <Link to="/services" className="nav-link">
-              Features
+            <Link to="/jokes" className="nav-link">
+              Jokes
             </Link>
           ) : userRole.includes("admin") ? (
             <Link to="/services" className="nav-link">
@@ -32,8 +35,18 @@ function NavbarBootstrap({ loggedIn, userRole, logout }) {
                 <img src={profile} className="profile-pic" />
               </Link>
 
-                <button onClick={logout} className="signin-button">Sign Out</button>
-
+              <button
+                onClick={() => {
+                  logout();
+                  var getUrl = window.location;
+                  var baseUrl = getUrl.protocol + "//" + getUrl.host;
+                  window.location.href = baseUrl + "/profile";
+                  // history.push((history.location.pathname = "/profile"));
+                }}
+                className="signin-button"
+              >
+                Sign Out
+              </button>
             </>
           ) : (
             <Link to="/signin">
