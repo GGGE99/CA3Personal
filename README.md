@@ -1,7 +1,14 @@
 
+
 # API-QuickStart-project [![Build Status](https://travis-ci.org/GGGE99/CA3Personal.svg?branch=main)](https://travis-ci.org/GGGE99/CA3Personal)
 
 ## [website](https://marcge.dk/)
+Alle users har password test2
+*der er følgene user oprattet:
+* user
+* admin
+* user_admin
+ 
 ## [Travis](https://travis-ci.org/github/GGGE99/CA3Personal)
 
 
