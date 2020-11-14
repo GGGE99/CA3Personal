@@ -27,6 +27,31 @@ function App() {
   };
   const [userInfo, setUserInfo] = useState(init);
 
+  function parseJwt(token) {
+    var base64Url = token.split(".")[1];
+    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    var jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+
+    return JSON.parse(jsonPayload);
+  }
+
+  useEffect(() => {
+    if (facade.getToken()) {
+      const tokenUser = parseJwt(facade.getToken());
+
+      setUser(tokenUser.sub);
+      setUserRole([...tokenUser.roles.split(",")]);
+      setLoggedIn(true);
+    }
+  }, []);
+
   useEffect(() => {
     FACADE.getUserInfo()
       .then((data) => {
@@ -98,7 +123,11 @@ function App() {
             />
           </Route>
           <Route path="/profile">
-            <Profile userInfo={userInfo} setUserInfo={setUserInfo} />
+            <Profile
+              userInfo={userInfo}
+              setUserInfo={setUserInfo}
+              loggedIn={loggedIn}
+            />
           </Route>
         </Switch>
       </Router>

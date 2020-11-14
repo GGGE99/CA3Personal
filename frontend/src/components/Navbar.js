@@ -20,7 +20,10 @@ function NavbarBootstrap({ loggedIn, userRole, logout }) {
             <Link to="/jokes" className="nav-link">
               Jokes
             </Link>
-          ) : userRole.includes("admin") ? (
+          ) : (
+            <></>
+          )}
+          {userRole.includes("admin") ? (
             <Link to="/services" className="nav-link">
               Services
             </Link>
