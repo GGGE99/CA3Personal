@@ -60,7 +60,7 @@ function App() {
   return (
     <>
       <Router>
-        <Navbar loggedIn={loggedIn} userRole={userRole} />
+        <Navbar loggedIn={loggedIn} userRole={userRole} logout={logout}/>
         <Switch>
           <Route path="/" exact>
             <Home />

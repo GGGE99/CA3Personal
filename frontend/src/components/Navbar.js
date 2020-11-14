@@ -4,7 +4,7 @@ import profile from "../images/profile.png";
 import { Navbar, Nav } from "react-bootstrap";
 import "./css/Navbar.css";
 
-function NavbarBootstrap({ loggedIn, userRole }) {
+function NavbarBootstrap({ loggedIn, userRole, logout }) {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Link to="/" className="navbar-brand">
@@ -31,9 +31,9 @@ function NavbarBootstrap({ loggedIn, userRole }) {
               <Link to="/profile" className="mr-4">
                 <img src={profile} className="profile-pic" />
               </Link>
-              <Link to="/signin">
-                <button className="signin-button">Sign Out</button>
-              </Link>
+
+                <button onClick={logout} className="signin-button">Sign Out</button>
+
             </>
           ) : (
             <Link to="/signin">
