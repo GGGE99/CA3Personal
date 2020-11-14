@@ -43,8 +43,7 @@ function NavbarBootstrap({ loggedIn, userRole, logout }) {
                   logout();
                   var getUrl = window.location;
                   var baseUrl = getUrl.protocol + "//" + getUrl.host;
-                  window.location.href = baseUrl + "/profile";
-                  // history.push((history.location.pathname = "/profile"));
+                  window.location.href = baseUrl + "/";
                 }}
                 className="signin-button"
               >
